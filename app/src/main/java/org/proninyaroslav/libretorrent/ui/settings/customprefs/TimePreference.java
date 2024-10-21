@@ -39,7 +39,7 @@ public class TimePreference extends DialogPreference
   {
     // Delegate to other constructor
     // Use the preferenceStyle as the default style
-    this(context, attrs, R.attr.preferenceStyle);
+    this(context, attrs, androidx.preference.R.attr.preferenceStyle);
   }
 
   public TimePreference(Context context, AttributeSet attrs, int defStyleAttr)

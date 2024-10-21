@@ -50,7 +50,7 @@ import org.proninyaroslav.libretorrent.core.model.data.metainfo.TorrentMetaInfo;
 import org.proninyaroslav.libretorrent.core.model.filetree.FileNode;
 import org.proninyaroslav.libretorrent.core.model.filetree.FilePriority;
 import org.proninyaroslav.libretorrent.core.model.filetree.TorrentContentFileTree;
-import org.proninyaroslav.libretorrent.core.model.stream.TorrentStreamServer;
+//import org.proninyaroslav.libretorrent.core.model.stream.TorrentStreamServer;
 import org.proninyaroslav.libretorrent.core.settings.SettingsRepository;
 import org.proninyaroslav.libretorrent.core.storage.TagRepository;
 import org.proninyaroslav.libretorrent.core.storage.TorrentRepository;
@@ -335,12 +335,15 @@ public class DetailTorrentViewModel extends AndroidViewModel {
                 }));
     }
 
+    /*
     public String getStreamUrl(int fileIndex) {
         String hostname = pref.streamingHostname();
         int port = pref.streamingPort();
 
         return TorrentStreamServer.makeStreamUrl(hostname, port, torrentId, fileIndex);
     }
+
+     */
 
     public void deleteTrackers(@NonNull List<String> urls) {
         engine.deleteTrackers(torrentId, urls);
@@ -481,42 +484,47 @@ public class DetailTorrentViewModel extends AndroidViewModel {
         if (torrent == null || ti == null)
             return;
 
-        switch (propertyId) {
-            case BR.name:
-                String name = mutableParams.getName();
-                if (name != null && !torrent.name.equals(name))
-                    engine.setTorrentName(torrentId, name);
-
-                break;
-            case BR.dirPath:
-                Uri dirPath = mutableParams.getDirPath();
-                if (dirPath != null && !torrent.downloadPath.equals(dirPath))
-                    engine.setDownloadPath(torrentId, dirPath);
-
-                break;
-            case BR.sequentialDownload:
-                boolean sequential = mutableParams.isSequentialDownload();
-                if (ti.sequentialDownload != sequential)
-                    engine.setSequentialDownload(torrentId, sequential);
-
-                break;
-            case BR.prioritiesChanged:
-                if (mutableParams.isPrioritiesChanged()) {
-                    Priority[] priorities = getFilePriorities();
-                    if (priorities != null) {
-                        if (!checkFreeSpace())
-                            freeSpaceError.onNext(true);
-                        engine.prioritizeFiles(torrentId, priorities);
-                    }
-                }
-            case BR.firstLastPiecePriority:
-                var firstLastPiecePriority = mutableParams.isFirstLastPiecePriority();
-                if (ti.firstLastPiecePriority != firstLastPiecePriority) {
-                    engine.setFirstLastPiecePriority(torrentId, firstLastPiecePriority);
-                }
-
-                break;
+        if (propertyId == BR.name)
+        {
+            String name = mutableParams.getName();
+            if (name != null && !torrent.name.equals(name))
+                engine.setTorrentName(torrentId, name);
         }
+        else if(propertyId == BR.dirPath)
+        {
+            Uri dirPath = mutableParams.getDirPath();
+            if (dirPath != null && !torrent.downloadPath.equals(dirPath))
+                engine.setDownloadPath(torrentId, dirPath);
+        }
+        else if (propertyId == BR.sequentialDownload)
+        {
+            boolean sequential = mutableParams.isSequentialDownload();
+            if (ti.sequentialDownload != sequential)
+                engine.setSequentialDownload(torrentId, sequential);
+        }
+        else if(propertyId == BR.prioritiesChanged)
+        {
+            if (mutableParams.isPrioritiesChanged()) {
+                Priority[] priorities = getFilePriorities();
+                if (priorities != null) {
+                    if (!checkFreeSpace())
+                        freeSpaceError.onNext(true);
+                    engine.prioritizeFiles(torrentId, priorities);
+                }
+            }
+            var firstLastPiecePriority = mutableParams.isFirstLastPiecePriority();
+            if (ti.firstLastPiecePriority != firstLastPiecePriority) {
+                engine.setFirstLastPiecePriority(torrentId, firstLastPiecePriority);
+            }
+        }
+        else if(propertyId == BR.firstLastPiecePriority)
+        {
+            var firstLastPiecePriority = mutableParams.isFirstLastPiecePriority();
+            if (ti.firstLastPiecePriority != firstLastPiecePriority) {
+                engine.setFirstLastPiecePriority(torrentId, firstLastPiecePriority);
+            }
+        }
+
     }
 
     private void startMakeFileTree() {

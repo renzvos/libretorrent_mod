@@ -35,7 +35,7 @@ public class ThemedSwipeRefreshLayout extends SwipeRefreshLayout
 
         TypedArray a = context.obtainStyledAttributes(new TypedValue().data, new int[] {
                 R.attr.foreground,
-                R.attr.colorSecondary
+                com.google.android.material.R.attr.colorSecondary
         });
         setColorSchemeColors(a.getColor(1, 0));
         setProgressBackgroundColorSchemeColor(a.getColor(0, 0));

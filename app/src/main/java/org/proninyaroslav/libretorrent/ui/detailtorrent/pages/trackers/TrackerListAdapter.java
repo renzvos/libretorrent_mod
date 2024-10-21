@@ -158,7 +158,7 @@ public class TrackerListAdapter extends ListAdapter<TrackerItem, TrackerListAdap
             TypedArray a = context.obtainStyledAttributes(new TypedValue().data, new int[] {
                     R.attr.selectableColor,
                     R.attr.defaultRectRipple,
-                    R.attr.colorError,
+                    com.google.android.material.R.attr.colorError,
                     R.attr.colorOk
             });
 

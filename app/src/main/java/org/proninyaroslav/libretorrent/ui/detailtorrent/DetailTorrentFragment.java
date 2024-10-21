@@ -282,7 +282,7 @@ public class DetailTorrentFragment extends Fragment
                 .subscribe((inActionMode) -> setTabLayoutColor(
                         Utils.getAttributeColor(
                                 activity,
-                                inActionMode ? R.attr.actionModeBackground : R.attr.toolbarColor
+                                inActionMode ? androidx.appcompat.R.attr.actionModeBackground : R.attr.toolbarColor
                         )
                 )));
     }
@@ -660,7 +660,7 @@ public class DetailTorrentFragment extends Fragment
         int curLineStartIndex = 0;
         for (String s : strings) {
             if (!Utils.isValidTrackerUrl(s) && field.getText() != null) {
-                TypedArray a = activity.obtainStyledAttributes(new TypedValue().data, new int[]{ R.attr.colorError});
+                TypedArray a = activity.obtainStyledAttributes(new TypedValue().data, new int[]{ androidx.appcompat.R.attr.colorError});
                 /* Select invalid url */
                 field.getText().setSpan(new ForegroundColorSpan(a.getColor(0, 0)),
                         curLineStartIndex,

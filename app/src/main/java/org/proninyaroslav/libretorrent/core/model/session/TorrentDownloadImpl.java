@@ -72,7 +72,8 @@ import org.proninyaroslav.libretorrent.core.model.data.TrackerInfo;
 import org.proninyaroslav.libretorrent.core.model.data.entity.FastResume;
 import org.proninyaroslav.libretorrent.core.model.data.entity.Torrent;
 import org.proninyaroslav.libretorrent.core.model.data.metainfo.TorrentMetaInfo;
-import org.proninyaroslav.libretorrent.core.model.stream.TorrentStream;
+import org.proninyaroslav.libretorrent.core.model.stream.StreamDetails;
+//import org.proninyaroslav.libretorrent.core.model.stream.TorrentStream;
 import org.proninyaroslav.libretorrent.core.storage.TorrentRepository;
 import org.proninyaroslav.libretorrent.core.system.FileSystemFacade;
 
@@ -197,7 +198,7 @@ class TorrentDownloadImpl implements TorrentDownload
         return !th.isValid() || stopped;
     }
 
-    private boolean hasMetadata() {
+    public boolean hasMetadata() {
         var ti = th.torrentFile();
         return !operationNotAllowed() && ti != null && ti.numFiles() > 0;
     }
@@ -1572,7 +1573,7 @@ class TorrentDownloadImpl implements TorrentDownload
      */
 
     @Override
-    public void setInterestedPieces(@NonNull TorrentStream stream, int startPiece, int numPieces)
+    public void setInterestedPieces(@NonNull StreamDetails stream, int startPiece, int numPieces)
     {
         if (startPiece < 0 || numPieces < 0)
             return;
@@ -1605,7 +1606,7 @@ class TorrentDownloadImpl implements TorrentDownload
     }
 
     @Override
-    public TorrentStream getStream(int fileIndex)
+    public StreamDetails getStream(int fileIndex)
     {
         if (!hasMetadata()) {
             return null;
@@ -1619,12 +1620,14 @@ class TorrentDownloadImpl implements TorrentDownload
         if (filePieces == null)
             throw new IllegalArgumentException("Incorrect file index");
 
-        return new TorrentStream(id, fileIndex,
+        return new StreamDetails(id, fileIndex,
                                  filePieces.first, filePieces.second, ti.pieceLength(),
                                  fs.fileOffset(fileIndex), fs.fileSize(fileIndex),
                                  ti.pieceSize(filePieces.second));
 
     }
+
+
 
     @Override
     public boolean isValid()

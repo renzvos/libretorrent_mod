@@ -136,7 +136,7 @@ public class FileManagerAdapter extends ListAdapter<FileManagerNode, FileManager
             FileSystemFacade fs = SystemFacadeHelper.getFileSystemFacade(context);
             if (item.isEnabled()) {
                 if (highlightFileTypes != null && highlightFileTypes.contains(fs.getExtension(item.getName()))) {
-                    fileName.setTextColor(Utils.getAttributeColor(context, R.attr.colorSecondary));
+                    fileName.setTextColor(Utils.getAttributeColor(context, com.google.android.material.R.attr.colorSecondary));
                 } else {
                     TypedArray a = context.obtainStyledAttributes(new TypedValue().data,
                             new int[]{ android.R.attr.textColorPrimary });

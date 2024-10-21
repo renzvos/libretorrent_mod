@@ -51,9 +51,9 @@ import org.proninyaroslav.libretorrent.core.model.data.metainfo.TorrentMetaInfo;
 import org.proninyaroslav.libretorrent.core.model.session.TorrentDownload;
 import org.proninyaroslav.libretorrent.core.model.session.TorrentSession;
 import org.proninyaroslav.libretorrent.core.model.session.TorrentSessionImpl;
-import org.proninyaroslav.libretorrent.core.model.stream.TorrentInputStream;
-import org.proninyaroslav.libretorrent.core.model.stream.TorrentStream;
-import org.proninyaroslav.libretorrent.core.model.stream.TorrentStreamServer;
+//import org.proninyaroslav.libretorrent.core.model.stream.TorrentInputStream;
+//import org.proninyaroslav.libretorrent.core.model.stream.TorrentStream;
+//import org.proninyaroslav.libretorrent.core.model.stream.TorrentStreamServer;
 import org.proninyaroslav.libretorrent.core.settings.SessionSettings;
 import org.proninyaroslav.libretorrent.core.settings.SettingsRepository;
 import org.proninyaroslav.libretorrent.core.storage.TagRepository;
@@ -98,8 +98,8 @@ public class TorrentEngine
     private static final String TAG = TorrentEngine.class.getSimpleName();
 
     private Context appContext;
-    private TorrentSession session;
-    private TorrentStreamServer torrentStreamServer;
+    public TorrentSession session;
+    //private TorrentStreamServer torrentStreamServer;
     private TorrentRepository repo;
     private TagRepository tagRepo;
     private SettingsRepository pref;
@@ -151,8 +151,11 @@ public class TorrentEngine
 
     public void start()
     {
-        if (isRunning())
+        Log.i(TAG, "start: ");
+        if (isRunning()) {
+            Log.i(TAG, " Engine Start Cancel - Already Started");
             return;
+        }
 
         Utils.startServiceBackground(appContext, new Intent(appContext, TorrentService.class));
     }
@@ -310,7 +313,7 @@ public class TorrentEngine
 
         disposables.clear();
         stopWatchDir();
-        stopStreamingServer();
+        //stopStreamingServer();
         session.requestStop();
         cleanTemp();
     }
@@ -439,11 +442,13 @@ public class TorrentEngine
     public Pair<MagnetInfo, Single<TorrentMetaInfo>> fetchMagnet(@NonNull String uri) throws Exception
     {
         if (!isRunning())
-            return null;
+            {Log.i(TAG, "fetchMagnet: Engine is not running");
+            return null;}
 
         MagnetInfo info = session.fetchMagnet(uri);
         if (info == null)
-            return null;
+            {Log.i(TAG, "fetchMagnet: Returned Info is null");
+            return null;}
         Single<TorrentMetaInfo> res = createFetchMagnetSingle(info.getSha1hash());
 
         return Pair.create(info, res);
@@ -791,7 +796,7 @@ public class TorrentEngine
         }).subscribeOn(Schedulers.io())
           .subscribe());
     }
-
+/*
     public TorrentStream getStream(@NonNull String id, int fileIndex)
     {
         if (!isRunning())
@@ -808,6 +813,8 @@ public class TorrentEngine
     {
         return new TorrentInputStream(session, stream);
     }
+
+ */
 
     /*
      * Do not run in the UI thread
@@ -1117,13 +1124,18 @@ public class TorrentEngine
         if (pref.watchDir())
             startWatchDir();
 
+        /*
+        TODO no need to enable streaming
         boolean enableStreaming = pref.enableStreaming();
         if (enableStreaming)
-            startStreamingServer();
+            startStreamingServer(); TODO starting done when video starts
+
+         */
 
         loadTorrents();
     }
 
+    /*
     private void startStreamingServer()
     {
         stopStreamingServer();
@@ -1147,6 +1159,9 @@ public class TorrentEngine
             torrentStreamServer.stop();
         torrentStreamServer = null;
     }
+
+     */
+
 
     private void loadTorrents()
     {
@@ -1693,13 +1708,16 @@ public class TorrentEngine
             }
         } else if (key.equals(appContext.getString(R.string.pref_key_streaming_enable))) {
             if (pref.enableStreaming())
-                startStreamingServer();
+            { //startStreamingServer();
+                 }
             else
-                stopStreamingServer();
+                { //stopStreamingServer();
+                     }
 
         } else if (key.equals(appContext.getString(R.string.pref_key_streaming_port)) ||
                 key.equals(appContext.getString(R.string.pref_key_streaming_hostname))) {
-            startStreamingServer();
+                { //startStreamingServer();
+                     }
 
         } else if (key.equals(appContext.getString(R.string.pref_key_anonymous_mode))) {
             SessionSettings s = session.getSettings();

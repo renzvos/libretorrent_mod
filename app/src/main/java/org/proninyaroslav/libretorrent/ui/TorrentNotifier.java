@@ -80,7 +80,7 @@ public class TorrentNotifier {
 
     public void makeNotifyChans() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
-            return;
+        {}   //return;
 
         NotificationChannel defaultChan = new NotificationChannel(
                 DEFAULT_NOTIFY_CHAN_ID,
@@ -92,7 +92,7 @@ public class TorrentNotifier {
         NotificationChannel foregroundChan = new NotificationChannel(
                 FOREGROUND_NOTIFY_CHAN_ID,
                 appContext.getString(R.string.foreground_notification),
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_DEFAULT
         );
         foregroundChan.setShowBadge(false);
 

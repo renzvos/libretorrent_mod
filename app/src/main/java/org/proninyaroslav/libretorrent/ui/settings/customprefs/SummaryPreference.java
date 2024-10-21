@@ -44,7 +44,7 @@ public class SummaryPreference extends Preference
     public SummaryPreference(Context context, AttributeSet attrs)
     {
         /* Use the preferenceStyle as the default style */
-        this(context, attrs, R.attr.preferenceStyle);
+        this(context, attrs, androidx.preference.R.attr.preferenceStyle);
     }
 
     public SummaryPreference(Context context, AttributeSet attrs, int defStyleAttr)

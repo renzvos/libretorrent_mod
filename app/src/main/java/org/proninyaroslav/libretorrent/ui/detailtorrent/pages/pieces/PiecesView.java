@@ -81,7 +81,7 @@ public class PiecesView extends View
             a.recycle();
         }
 
-        TypedArray a = context.obtainStyledAttributes(new TypedValue().data, new int[] { R.attr.colorSecondary });
+        TypedArray a = context.obtainStyledAttributes(new TypedValue().data, new int[] { com.google.android.material.R.attr.colorSecondary  });
         complete.setColor(a.getColor(0, 0));
         a.recycle();
     }

@@ -516,12 +516,12 @@ public class DetailTorrentFilesFragment extends Fragment
             return;
         int fileIndex = it.next().index;
 
-        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "url");
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, viewModel.getStreamUrl(fileIndex));
+        //Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        //sharingIntent.setType("text/plain");
+        //sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "url");
+       // sharingIntent.putExtra(Intent.EXTRA_TEXT, viewModel.getStreamUrl(fileIndex));
 
-        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_via)));
+        //startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_via)));
     }
 
     private void openFile(String fileName, Uri path)

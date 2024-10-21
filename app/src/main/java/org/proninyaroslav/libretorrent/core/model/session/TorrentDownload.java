@@ -29,7 +29,7 @@ import org.proninyaroslav.libretorrent.core.model.data.Priority;
 import org.proninyaroslav.libretorrent.core.model.data.TorrentStateCode;
 import org.proninyaroslav.libretorrent.core.model.data.TrackerInfo;
 import org.proninyaroslav.libretorrent.core.model.data.metainfo.TorrentMetaInfo;
-import org.proninyaroslav.libretorrent.core.model.stream.TorrentStream;
+import org.proninyaroslav.libretorrent.core.model.stream.StreamDetails;
 
 import java.util.List;
 import java.util.Set;
@@ -179,9 +179,9 @@ public interface TorrentDownload
 
     void readPiece(int pieceIndex);
 
-    void setInterestedPieces(@NonNull TorrentStream stream, int startPiece, int numPieces);
+    void setInterestedPieces(@NonNull StreamDetails stream, int startPiece, int numPieces);
 
-    TorrentStream getStream(int fileIndex);
+    StreamDetails getStream(int fileIndex);
 
     boolean isValid();
 
@@ -194,4 +194,6 @@ public interface TorrentDownload
     void saveResumeData(boolean force);
 
     boolean hasMissingFiles();
+
+    boolean hasMetadata();
 }

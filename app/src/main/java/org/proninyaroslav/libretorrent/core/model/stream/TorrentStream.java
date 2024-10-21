@@ -18,8 +18,8 @@
  */
 
 package org.proninyaroslav.libretorrent.core.model.stream;
-
-import android.os.Parcel;
+/*
+import android.os.Parcel; TODO
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
@@ -32,7 +32,9 @@ public class TorrentStream implements Parcelable
     public String torrentId;
     public int selectedFileIndex;
     public int firstFilePiece, lastFilePiece;
-    /* The last piece may be smaller than the rest */
+    /* The last piece may be smaller than the rest
+
+
     public int lastFilePieceSize;
     public long fileOffset, fileSize;
     public int pieceLength;
@@ -135,3 +137,4 @@ public class TorrentStream implements Parcelable
                 '}';
     }
 }
+*/

@@ -58,9 +58,9 @@ public class ThemedSpeedDialView extends SpeedDialView
     {
         Context context = getContext();
         TypedArray a = context.obtainStyledAttributes(new TypedValue().data, new int[] {
-                R.attr.colorOnSecondary,
-                R.attr.colorSecondary,
-                R.attr.colorOnBackground,
+                com.google.android.material.R.attr.colorOnSecondary,
+                com.google.android.material.R.attr.colorSecondary,
+                com.google.android.material.R.attr.colorOnBackground,
                 R.attr.foreground
         });
         int tintColor = a.getColor(0, 0);

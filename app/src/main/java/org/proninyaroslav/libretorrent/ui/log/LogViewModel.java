@@ -109,31 +109,37 @@ public class LogViewModel extends AndroidViewModel
         @Override
         public void onPropertyChanged(androidx.databinding.Observable sender, int propertyId)
         {
-            switch (propertyId) {
-                case BR.logging:
-                    boolean logging = mutableParams.isLogging();
-                    if (!logging) {
-                        logPaused = false;
-                        recordingStopped = false;
-                    }
-                    pref.logging(logging);
-                    break;
-                case BR.logSessionFilter:
-                    pref.logSessionFilter(mutableParams.isLogSessionFilter());
-                    break;
-                case BR.logDhtFilter:
-                    pref.logDhtFilter(mutableParams.isLogDhtFilter());
-                    break;
-                case BR.logPeerFilter:
-                    pref.logPeerFilter(mutableParams.isLogPeerFilter());
-                    break;
-                case BR.logPortmapFilter:
-                    pref.logPortmapFilter(mutableParams.isLogPortmapFilter());
-                    break;
-                case BR.logTorrentFilter:
-                    pref.logTorrentFilter(mutableParams.isLogTorrentFilter());
-                    break;
+
+            if (propertyId == BR.logging)
+            {
+                boolean logging = mutableParams.isLogging();
+                if (!logging) {
+                    logPaused = false;
+                    recordingStopped = false;
+                }
+                pref.logging(logging);
             }
+            else if(propertyId == BR.logSessionFilter)
+            {
+                pref.logSessionFilter(mutableParams.isLogSessionFilter());
+            }
+            else if(propertyId == BR.logDhtFilter)
+            {
+                pref.logDhtFilter(mutableParams.isLogDhtFilter());
+            }
+            else if (propertyId == BR.logPeerFilter)
+            {
+                pref.logPeerFilter(mutableParams.isLogPeerFilter());
+            }
+            else if (propertyId == BR.logPortmapFilter)
+            {
+                pref.logPortmapFilter(mutableParams.isLogPortmapFilter());
+            }
+            else if (propertyId == BR.logTorrentFilter)
+            {
+                pref.logTorrentFilter(mutableParams.isLogTorrentFilter());
+            }
+
         }
     };
 

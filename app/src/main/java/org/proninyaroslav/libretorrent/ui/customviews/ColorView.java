@@ -60,7 +60,7 @@ public class ColorView extends View {
         borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         a = context.getTheme().obtainStyledAttributes(
                 attrs,
-                new int[]{R.attr.colorControlNormal},
+                new int[]{androidx.appcompat.R.attr.colorControlNormal},
                 0, 0
         );
         try {

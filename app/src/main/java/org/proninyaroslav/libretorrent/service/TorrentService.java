@@ -67,7 +67,7 @@ public class TorrentService extends Service
 {
     private static final String TAG = TorrentService.class.getSimpleName();
 
-    private static final int SERVICE_STARTED_NOTIFICATION_ID = -1;
+    private static final int SERVICE_STARTED_NOTIFICATION_ID = 1252;
     private static final int FOREGROUND_NOTIFY_UPDATE_DELAY = 1000; /* ms */
     public static final String ACTION_SHUTDOWN = "org.proninyaroslav.libretorrent.services.TorrentService.ACTION_SHUTDOWN";
     public static final String ACTION_RESTART_FOREGROUND_NOTIFICATION = "org.proninyaroslav.libretorrent.services.TorrentService.ACTION_RESTART_FOREGROUND_NOTIFICATION";

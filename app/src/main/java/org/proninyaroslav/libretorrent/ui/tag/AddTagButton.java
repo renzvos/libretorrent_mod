@@ -63,8 +63,8 @@ public class AddTagButton extends Chip {
         TypedArray a = context.obtainStyledAttributes(
                 new TypedValue().data,
                 new int[]{
-                        R.attr.colorPrimary,
-                        R.attr.colorOnPrimary,
+                        androidx.appcompat.R.attr.colorPrimary,
+                        com.google.android.material.R.attr.colorOnPrimary,
                 });
         setChipBackgroundColor(new ColorStateList(
                 new int[][]{new int[]{android.R.attr.state_enabled}},

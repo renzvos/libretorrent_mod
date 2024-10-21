@@ -46,7 +46,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * (e.g 3 bytes            *         *                 *
  *  per piece)             |         |                 |
  *                     fileStart  filePos             EOF
- */
+
 
 public class TorrentInputStream extends InputStream
 {
@@ -164,7 +164,7 @@ public class TorrentInputStream extends InputStream
 
     /*
      * Calculate global file offset to local offset inside piece
-     */
+
 
     private int filePosToPiecePos(int piece, long pos)
     {
@@ -185,7 +185,7 @@ public class TorrentInputStream extends InputStream
 
     /*
      * Returns byte as an int in the range 0 to 255
-     */
+
 
     private int toUnsignedByte(byte b)
     {
@@ -205,13 +205,13 @@ public class TorrentInputStream extends InputStream
             if (task == null)
                 throw new IOException("task " + stream.torrentId + " is null");
 
-            /* EOF check */
+            /* EOF check
             if (filePos == eof) {
                 cacheBuf = null;
                 return EOF;
             }
 
-            /* Pieces definition that need to be read */
+            /* Pieces definition that need to be read
             int p = stream.bytesToPieceIndex(filePos + 1);
 
             task.setInterestedPieces(stream, p, 1);
@@ -226,7 +226,7 @@ public class TorrentInputStream extends InputStream
             piece.readLength = 1;
             piece.bufIndex = 0;
 
-            /* Check cache */
+            /* Check cache
             if (p == cachePieceIndex) {
                 readFromCache(piece, readSession.buf);
                 filePos++;
@@ -238,7 +238,7 @@ public class TorrentInputStream extends InputStream
 
             if (!waitForPiece(task, p))
                 return EOF;
-            /* Async piece reading */
+            /* Async piece reading
             task.readPiece(p);
 
             if (!waitForReadPieces())
@@ -271,7 +271,7 @@ public class TorrentInputStream extends InputStream
             if (task == null)
                 throw new IOException("Task " + stream.torrentId + " is null");
 
-            /* EOF check */
+            /* EOF check
             if (filePos == eof) {
                 cacheBuf = null;
                 return EOF;
@@ -280,7 +280,7 @@ public class TorrentInputStream extends InputStream
                 len = (int)(eof - filePos);
 
 
-            /* Pieces definition that need to be read */
+            /* Pieces definition that need to be read
             int firstPiece = stream.bytesToPieceIndex(filePos + 1);
             int lastPiece = stream.bytesToPieceIndex(filePos + len);
             int numPieces = lastPiece - firstPiece + 1;
@@ -319,10 +319,10 @@ public class TorrentInputStream extends InputStream
                 }
                 bufIndex += piece.readLength;
 
-                /* Check cache */
+                /* Check cache
                 if (p == cachePieceIndex) {
                     readFromCache(piece, b);
-                    /* Exit if there are no other pieces except cached */
+                    /* Exit if there are no other pieces except cached
                     if (numPieces == 1) {
                         filePos += len;
 
@@ -334,11 +334,11 @@ public class TorrentInputStream extends InputStream
 
                 if (!waitForPiece(task, p))
                     return EOF;
-                /* Async pieces reading */
+                /* Async pieces reading
                 task.readPiece(p);
             }
 
-            /* Wait for pieces reading */
+            /* Wait for pieces reading
             if (!waitForReadPieces())
                 return EOF;
             filePos += len;
@@ -380,7 +380,7 @@ public class TorrentInputStream extends InputStream
             if (n <= 0)
                 return 0;
 
-            /* EOF check */
+            /* EOF check
             if (filePos == eof)
                 return 0;
             if (filePos + n > eof)
@@ -469,3 +469,6 @@ public class TorrentInputStream extends InputStream
         }
     }
 }
+
+ */
+

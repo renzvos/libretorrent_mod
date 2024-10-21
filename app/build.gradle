@@ -1,20 +1,21 @@
 import com.android.build.OutputFile
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace 'org.proninyaroslav.libretorrent'
     compileSdkVersion 33
     defaultConfig {
-        applicationId 'org.proninyaroslav.libretorrent'
-        minSdkVersion 24
+        // applicationId 'org.proninyaroslav.libretorrent'
+        minSdkVersion 26
         targetSdkVersion 33
-        versionCode 25
+        //versionCode 25
         /*
          * Convection:
          *  major.minor.[revision][-some_info]
          */
-        versionName '3.4'
+        //versionName '3.4'
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true
 
@@ -31,6 +32,7 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
+    /*
     flavorDimensions "deploy"
 
     productFlavors {
@@ -41,6 +43,8 @@ android {
             dimension "deploy"
         }
     }
+
+     */
 
     buildTypes {
         /* Enable or disable logging in build types */
@@ -54,10 +58,8 @@ android {
         }
 
         debug {
-            applicationIdSuffix '.debug'
-            versionNameSuffix '-DEBUG'
+            //applicationIdSuffix '.debug'
             testCoverageEnabled true
-            debuggable true
 
             buildConfigField('boolean', SESSION_LOGGING, 'true')
         }
@@ -73,12 +75,15 @@ android {
     }
 
     project.ext.versionCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3, 'x86_64': 4]
+    /*
     applicationVariants.all { variant ->
         outputs.all { output ->
             versionCodeOverride =
                     project.ext.versionCodes.get(output.getFilter(OutputFile.ABI), 0) * 1000000 + versionCode
         }
     }
+
+     */
 
     compileOptions {
         encoding 'UTF-8'
@@ -91,6 +96,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig true
         dataBinding true
     }
 
@@ -117,6 +123,8 @@ def ROOM_VERSION = '2.5.0'
 def LIFECYCLE_VERSION = '2.5.1'
 
 dependencies {
+    //implementation 'androidx.core:core-ktx:+'
+
     /* Testing */
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

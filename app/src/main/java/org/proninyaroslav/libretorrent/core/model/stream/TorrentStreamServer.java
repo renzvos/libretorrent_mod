@@ -46,8 +46,9 @@ import static org.nanohttpd.NanoHTTPD.Response.Status.RANGE_NOT_SATISFIABLE;
 /*
  * The server that allows to stream selected file from a torrent and to which a specific address is assigned.
  * Supports partial content and DLNA (for some file formats)
+ * TODO Depricated
  */
-
+/*
 public class TorrentStreamServer extends NanoHTTPD
 {
     private static final String TAG = TorrentStreamServer.class.getSimpleName();
@@ -88,7 +89,7 @@ public class TorrentStreamServer extends NanoHTTPD
 
     /*
      * URL format: http://'hostname':'port'/stream?file='file_index'&torrent='torrent_hash'
-     */
+
 
     public static String makeStreamUrl(@NonNull String hostname, int port,
                                        @NonNull String torrentId, int fileIndex)
@@ -173,7 +174,7 @@ public class TorrentStreamServer extends NanoHTTPD
             /*
              * Get if-range header. If present, it must match etag or else we
              * should ignore the range request
-             */
+
             String ifRange = header.get("if-range");
             boolean headerIfRangeMissingOrMatching = (ifRange == null || etag.equals(ifRange));
 
@@ -186,13 +187,13 @@ public class TorrentStreamServer extends NanoHTTPD
                 /*
                  * Range request that matches current etag
                  * and the startFrom of the range is satisfiable
-                 */
+
                 if (headerIfNoneMatchPresentAndMatching) {
                     /*
                      * Range request that matches current etag
                      * and the startFrom of the range is satisfiable
                      * would return range from file respond with not-modified
-                     */
+
                     res = newFixedLengthResponse(NOT_MODIFIED, MIME_OCTET_STREAM, "");
                     res.addHeader("ETag", etag);
 
@@ -218,16 +219,17 @@ public class TorrentStreamServer extends NanoHTTPD
                     /*
                      * Return the size of the file
                      * 4xx responses are not trumped by if-none-match
-                     */
-                    res = newFixedLengthResponse(RANGE_NOT_SATISFIABLE, NanoHTTPD.MIME_PLAINTEXT, "");
-                    res.addHeader("Content-Range", "bytes */" + stream.fileSize);
-                    res.addHeader("ETag", etag);
+                     *
+                  */
+                    //res = newFixedLengthResponse(RANGE_NOT_SATISFIABLE, NanoHTTPD.MIME_PLAINTEXT, "");
+                    //res.addHeader("Content-Range", "bytes */" + stream.fileSize);
+                    //res.addHeader("ETag", etag);
 
-                } else if (range == null && headerIfNoneMatchPresentAndMatching) {
+                //} else if (range == null && headerIfNoneMatchPresentAndMatching) {
                     /*
                      * Full-file-fetch request would return entire file
                      * respond with not-modified
-                     */
+
                     res = newFixedLengthResponse(NOT_MODIFIED, MIME_OCTET_STREAM, "");
                     res.addHeader("ETag", etag);
 
@@ -235,7 +237,7 @@ public class TorrentStreamServer extends NanoHTTPD
                     /*
                      * Range request that doesn't match current etag
                      * would return entire (different) file respond with not-modified
-                     */
+
                     res = newFixedLengthResponse(NOT_MODIFIED, MIME_OCTET_STREAM, "");
                     res.addHeader("ETag", etag);
 
@@ -282,3 +284,5 @@ public class TorrentStreamServer extends NanoHTTPD
         }
     }
 }
+
+                     */

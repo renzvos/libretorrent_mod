@@ -129,7 +129,7 @@ public class Utils {
     public static void colorizeProgressBar(@NonNull Context context,
                                            @NonNull ProgressBar progress) {
         progress.getProgressDrawable().setColorFilter(new PorterDuffColorFilter(
-                getAttributeColor(context, R.attr.colorSecondary),
+                getAttributeColor(context, com.google.android.material.R.attr.colorSecondary),
                 PorterDuff.Mode.SRC_IN)
         );
     }
@@ -424,10 +424,15 @@ public class Utils {
      */
 
     public static void startServiceBackground(@NonNull Context context, @NonNull Intent i) {
+        Log.i(TAG, "TorrentEngine-ServiceStarter: ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Postpone the service start until the main thread is free to avoid ANR
             new Handler(Looper.getMainLooper())
-                    .post(() -> context.startForegroundService(i));
+                    .post(() -> {
+                        Log.i(TAG, "Delayed Service Start Initiated: ");
+                        context.startForegroundService(i);
+                    }
+                    );
         } else {
             context.startService(i);
         }
@@ -611,7 +616,7 @@ public class Utils {
     }
 
     public static void showActionModeStatusBar(@NonNull Activity activity, boolean mode) {
-        int attr = (mode ? R.attr.actionModeBackground : R.attr.statusBarColor);
+        int attr = (mode ? androidx.appcompat.R.attr.actionModeBackground : R.attr.statusBarColor);
         activity.getWindow().setStatusBarColor(getAttributeColor(activity, attr));
     }
 
